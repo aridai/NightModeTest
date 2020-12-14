@@ -43,5 +43,76 @@ dependencies {
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.5")
 
     //  https://mvnrepository.com/artifact/com.willowtreeapps.hyperion/hyperion-core
-    //  debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.30")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.30")
+
+    /*
+    2020-12-14 14:53:01.185 10354-10489/com.example.nightmodetest D/LeakCanary: ​
+    ====================================
+    HEAP ANALYSIS RESULT
+    ====================================
+    1 APPLICATION LEAKS
+
+    References underlined with "~~~" are likely causes.
+    Learn more at https://squ.re/leaks.
+
+    3273545 bytes retained by leaking objects
+    Signature: 8420f46333a4dc28cc99f28a0bc2da2f3891f
+    ┬───
+    │ GC Root: System class
+    │
+    ├─ android.provider.FontsContract class
+    │    Leaking: NO (Application↓ is not leaking and a class is never leaking)
+    │    ↓ static FontsContract.sContext
+    ├─ android.app.Application instance
+    │    Leaking: NO (Application is a singleton)
+    │    mBase instance of android.app.ContextImpl, not wrapping known Android context
+    │    ↓ Application.mLoadedApk
+    │                  ~~~~~~~~~~
+    ├─ android.app.LoadedApk instance
+    │    Leaking: UNKNOWN
+    │    Retaining 3276149 bytes in 3132 objects
+    │    mApplication instance of android.app.Application
+    │    ↓ LoadedApk.mServices
+    │                ~~~~~~~~~
+    ├─ android.util.ArrayMap instance
+    │    Leaking: UNKNOWN
+    │    Retaining 3275364 bytes in 3115 objects
+    │    ↓ ArrayMap.mArray
+    │               ~~~~~~
+    ├─ java.lang.Object[] array
+    │    Leaking: UNKNOWN
+    │    Retaining 3275323 bytes in 3113 objects
+    │    ↓ Object[].[2]
+    │               ~~~
+    ╰→ com.example.nightmodetest.SubActivity instance
+    ​     Leaking: YES (ObjectWatcher was watching this because com.example.nightmodetest.SubActivity received
+    ​     Activity#onDestroy() callback and Activity#mDestroyed is true)
+    ​     Retaining 3273545 bytes in 3081 objects
+    ​     key = 50a7af7d-4eac-463c-966b-047b661b866d
+    ​     watchDurationMillis = 9743
+    ​     retainedDurationMillis = 4743
+    ​     mApplication instance of android.app.Application
+    ​     mBase instance of androidx.appcompat.view.ContextThemeWrapper, not wrapping known Android context
+    ====================================
+    0 LIBRARY LEAKS
+
+    A Library Leak is a leak caused by a known bug in 3rd party code that you do not have control over.
+    See https://square.github.io/leakcanary/fundamentals-how-leakcanary-works/#4-categorizing-leaks
+    ====================================
+    METADATA
+
+    Please include this in bug reports and Stack Overflow questions.
+
+    Build.VERSION.SDK_INT: 27
+    Build.MANUFACTURER: Huawei
+    LeakCanary version: 2.5
+    App process name: com.example.nightmodetest
+    Stats: LruCache[maxSize=3000,hits=1123,misses=28589,hitRate=3%]
+    RandomAccess[bytes=1471225,reads=28589,travel=10261791662,range=10256734,size=12963667]
+    Analysis duration: 14033 ms
+    Heap dump file path: /data/user/0/com.example.nightmodetest/files/leakcanary/2020-12-14_14-52-45_151.hprof
+    Heap dump timestamp: 1607925181120
+    Heap dump duration: 1501 ms
+    ====================================
+     */
 }
