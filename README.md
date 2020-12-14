@@ -1,5 +1,7 @@
 # NightModeTest
 
+HyperionとAppCompatDelegate.setDefaultNightMode()を併用するとメモリリークすることのテスト
+
 MainActivity.kt:
 
 ```Kotlin
